@@ -1,3 +1,27 @@
+⚛️ React App Generator
+A full-stack automation tool built with **Django** and **React** that automatically generates, runs, and saves React project code.
+
+## 🌟 Features
+- **Automated Code Generation:** Quickly scaffold React components and logic.
+- **Project Management:** Automatically saves generated code into organized folders.
+- **Full-Stack Integration:** Uses a Python/Django backend to handle file system operations.
+
+## 🛠️ Tech Stack
+- **Backend:** Python, Django
+- **Frontend:** React.js, JavaScript, HTML5, CSS3
+- **Tools:** Node.js, NPM
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.8+
+- Node.js & npm
+
+### Installation
+1. **Clone the repo:**
+   ```bash
+   git clone [https://github.com/svtkavi25-sys/reactwebsite.git](https://github.com/svtkavi25-sys/reactwebsite.git)
+
 Create a virtual environment:
 
 Install Python dependencies:
