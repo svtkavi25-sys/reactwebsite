@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generated Project</title>
+    <link rel="stylesheet" href="{% static 'mainapp/style.css' %}">
+</head>
+<body>
+<div class="app-shell no-sidebar">
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Generated project</p>
+                <h1>🚀 Your React project is ready</h1>
+            </div>
+            <div class="actions">
+                <a class="btn btn-secondary" href="/">← Back</a>
+                {% if view_url %}
+                    <a class="btn btn-primary" href="{{ view_url }}" target="_blank">View Project</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <section class="file-list">
+            <h2>Project files</h2>
+            {% if files %}
+                {% for file in files %}
+                    <article class="file-card">
+                        <div>
+                            <h3>{{ file.name }}</h3>
+                            <pre>{{ file.content }}</pre>
+                        </div>
+                        <div class="file-actions">
+                            <a href="{{ file.path }}" target="_blank" class="btn btn-secondary">Open</a>
+                            <a href="{{ file.path }}" download class="btn btn-primary">Download</a>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>No files were generated yet. Try again with a different prompt.</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</div>
+</body>
+</html> 

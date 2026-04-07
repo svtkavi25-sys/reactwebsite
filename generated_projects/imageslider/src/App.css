@@ -1,0 +1,145 @@
+:root {
+  color-scheme: dark;
+  color: #eff6ff;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.2), transparent 20%), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 18%), #08101f;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.2), transparent 20%), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 18%), #08101f;
+  color: #eff6ff;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.project-shell {
+  min-height: 100vh;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.2), transparent 20%), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 18%), #08101f;
+}
+
+.project-card {
+  width: min(1080px, 100%);
+  background: rgba(10, 18, 37, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 32px;
+  box-shadow: 0 28px 90px rgba(15, 23, 42, 0.55);
+  overflow: hidden;
+  transition: transform 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+}
+
+.project-hero {
+  padding: 34px;
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.14), rgba(168, 85, 247, 0.12));
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: #60a5fa;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 18px;
+}
+
+.project-hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 2.4vw, 3rem);
+  line-height: 1.05;
+  color: #eff6ff;
+}
+
+.project-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 760px;
+  line-height: 1.65;
+}
+
+.project-content {
+  padding: 32px;
+}
+
+.project-content h2 {
+  margin-top: 0;
+  color: #a78bfa;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+button {
+  background: #60a5fa;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+input, textarea, select {
+  background: rgba(15, 23, 42, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 14px;
+  color: #eff6ff;
+  padding: 0.95rem 1rem;
+  width: 100%;
+}
+
+.project-shell.theme-sunset-warmth .project-card {
+  max-width: 960px;
+  border-radius: 40px;
+}
+
+.project-shell.theme-frost-glass .project-card {
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+}
+
+.project-shell.theme-cream-minimal .project-card {
+  box-shadow: 0 40px 120px rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+}
+
+.project-shell.theme-midnight-glow .project-hero {
+  position: relative;
+}
+
+.project-shell.theme-midnight-glow .project-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(96, 165, 250, 0.14), transparent 55%);
+  pointer-events: none;
+}
+
+.project-shell.theme-midnight-glow .project-hero > * {
+  position: relative;
+}
+
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}

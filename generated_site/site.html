@@ -1,0 +1,481 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnify - Your Learning Journey Starts Here</title>
+    <style>
+        /* General Body & Container */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden; /* Clear floats */
+            padding: 20px 0;
+        }
+
+        /* Header */
+        header {
+            background: #007bff; /* Primary Blue */
+            color: #fff;
+            padding-top: 20px;
+            min-height: 70px;
+            border-bottom: #0056b3 3px solid;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0; /* Remove extra padding for header container */
+        }
+
+        header .logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+
+        header nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        header nav li {
+            display: inline;
+            padding: 0 15px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: #d1e7ff; /* Lighter blue on hover */
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            color: #fff;
+            background: #28a745; /* Green */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            background: #218838; /* Darker green on hover */
+        }
+
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        /* Sections */
+        section {
+            padding: 40px 0;
+            margin-bottom: 20px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        section h2, section h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #0056b3 url('https://via.placeholder.com/1500x600/0056b3/ffffff?text=Learnify+Hero') no-repeat center center/cover; /* Darker blue background with placeholder image */
+            color: #fff;
+            text-align: center;
+            padding: 100px 0;
+            margin-bottom: 0; /* Remove bottom margin for hero */
+            box-shadow: none;
+        }
+
+        .hero h2 {
+            color: #fff;
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        /* About Us Section */
+        .about-us p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 15px auto;
+        }
+
+        /* Course Listing */
+        .course-listing {
+            background: #f4f4f4; /* Lighter background */
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 10px; /* Add some padding to the grid itself */
+        }
+
+        .course-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .course-card img {
+            max-width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .course-card h4 {
+            color: #007bff;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .course-card p {
+            font-size: 0.95em;
+            color: #666;
+            min-height: 40px; /* ensure consistent height */
+        }
+
+        .course-card .course-meta {
+            font-size: 0.85em;
+            color: #888;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: #e9ecef; /* Light grey background */
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border-left: 5px solid #007bff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card h4 {
+            margin: 0;
+            color: #333;
+        }
+
+        .testimonial-card span {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: #fff;
+        }
+
+        .contact-section p {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: #fff;
+            transition: background 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .contact-form button:hover {
+            background: #0056b3;
+        }
+
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer .social-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: #007bff;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            header nav ul {
+                margin-top: 15px;
+            }
+
+            header nav li {
+                padding: 0 8px;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h2 {
+                font-size: 2.2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .course-grid, .testimonial-grid {
+                grid-template-columns: 1fr; /* Stack columns on small screens */
+            }
+
+            .course-card img {
+                height: auto; /* Allow image to adjust */
+            }
+
+            footer .container {
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo"><a href="#">Learnify</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Unlock Your Potential with Learnify</h2>
+                <p>High-quality courses taught by industry experts. Learn at your own pace, anytime, anywhere.</p>
+                <a href="#courses" class="btn">Explore Courses</a>
+            </div>
+        </section>
+
+        <section id="about" class="about-us">
+            <div class="container">
+                <h3>About Learnify</h3>
+                <p>Learnify is dedicated to providing accessible and engaging online education. Our mission is to empower individuals worldwide to achieve their personal and professional goals through continuous learning. We partner with top educators and institutions to bring you the most relevant and up-to-date content.</p>
+                <p>Whether you're looking to start a new career, enhance existing skills, or simply explore a new hobby, Learnify has a course for you.</p>
+            </div>
+        </section>
+
+        <section id="courses" class="course-listing">
+            <div class="container">
+                <h3>Our Popular Courses</h3>
+                <div class="course-grid">
+                    <!-- Course Card 1 -->
+                    <div class="course-card">
+                        <img src="https://via.placeholder.com/300x180/007bff/ffffff?text=Web+Dev" alt="Web Development Course">
+                        <h4>Mastering Web Development</h4>
+                        <p>Learn front-end and back-end web development from scratch.</p>
+                        <div class="course-meta">
+                            <span>&#9733;&#9733;&#9733;&#9733;&#9734; (4.5)</span>
+                            <span>120 hours</span>
+                        </div>
+                        <a href="#" class="btn btn-small">View Course</a>
+                    </div>
+                    <!-- Course Card 2 -->
+                    <div class="course-card">
+                        <img src="https://via.placeholder.com/300x180/28a745/ffffff?text=Data+Science" alt="Data Science Course">
+                        <h4>Introduction to Data Science</h4>
+                        <p>Dive into data analysis, machine learning, and visualization.</p>
+                        <div class="course-meta">
+                            <span>&#9733;&#9733;&#9733;&#9733;&#9733; (5.0)</span>
+                            <span>150 hours</span>
+                        </div>
+                        <a href="#" class="btn btn-small">View Course</a>
+                    </div>
+                    <!-- Course Card 3 -->
+                    <div class="course-card">
+                        <img src="https://via.placeholder.com/300x180/ffc107/333333?text=Graphic+Design" alt="Graphic Design Course">
+                        <h4>Fundamentals of Graphic Design</h4>
+                        <p>Unlock your creativity with essential design principles and tools.</p>
+                        <div class="course-meta">
+                            <span>&#9733;&#9733;&#9733;&#9733;&#9734; (4.7)</span>
+                            <span>80 hours</span>
+                        </div>
+                        <a href="#" class="btn btn-small">View Course</a>
+                    </div>
+                    <!-- Course Card 4 -->
+                    <div class="course-card">
+                        <img src="https://via.placeholder.com/300x180/dc3545/ffffff?text=Digital+Marketing" alt="Digital Marketing Course">
+                        <h4>Complete Digital Marketing Guide</h4>
+                        <p>Master SEO, social media, content marketing, and more.</p>
+                        <div class="course-meta">
+                            <span>&#9733;&#9733;&#9733;&#9733;&#9733; (4.9)</span>
+                            <span>100 hours</span>
+                        </div>
+                        <a href="#" class="btn btn-small">View Course</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <div class="container">
+                <h3>What Our Students Say</h3>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Learnify transformed my career! The web development course was comprehensive and the instructors were amazing."</p>
+                        <h4>- Jane Doe</h4>
+                        <span>Web Developer</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"I never thought I could understand data science, but Learnify made it so engaging and easy to follow. Highly recommend!"</p>
+                        <h4>- John Smith</h4>
+                        <span>Data Analyst</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h3>Contact Us</h3>
+                <p>Have questions? Reach out to us!</p>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Learnify. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+```

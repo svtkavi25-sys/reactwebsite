@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyAI React Generator</title>
+<link rel="stylesheet" href="{% static 'mainapp/style.css' %}">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <span class="brand-icon">⚡</span>
+            <div>
+                <h1>MyAI</h1>
+                <p>React app builder</p>
+            </div>
+        </div>
+        <nav>
+            <a href="/">Chat</a>
+            <a href="/history">History</a>
+        </nav>
+    </aside>
+
+    <main class="main">
+        <section class="hero-card">
+            <div class="hero-copy">
+                <p class="eyebrow">Build faster with AI</p>
+                <h1>Create beautiful React apps in seconds</h1>
+                <p>Enter a prompt, select the project type, and generate a clean starter app with one click.</p>
+            </div>
+
+            <form class="form-card" action="/process/" method="POST">
+                {% csrf_token %}
+                <label>
+                    <span>Project prompt</span>
+                    <textarea name="prompt" placeholder="Describe your React app..." required></textarea>
+                </label>
+
+                <label>
+                    <span>Folder name</span>
+                    <input type="text" name="folder" placeholder="e.g. todoApp" required>
+                </label>
+
+                <label>
+                    <span>Generation type</span>
+                    <select name="type">
+                        <option value="text">Text</option>
+                        <option value="react">Generate React App</option>
+                        <option value="image">Generate Image</option>
+                    </select>
+                </label>
+
+                <button type="submit" class="btn btn-primary">Generate Project</button>
+            </form>
+        </section>
+    </main>
+</div>
+</body>
+</html>

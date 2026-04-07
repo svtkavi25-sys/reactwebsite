@@ -1,0 +1,266 @@
+import React from "react";
+import "./App.css";
+
+function GeneratedApp() {
+  // State to hold the list of study items
+  // Each item is an object: { id: number, subject: string, targetTime: number, completed: boolean }
+  const [studyItems, setStudyItems] = React.useState([]);
+  // State for the new subject input field
+  const [newSubject, setNewSubject] = React.useState('');
+  // State for the new target study time input field
+  const [newStudyTime, setNewStudyTime] = React.useState(''); // Stored as string initially
+  // State to generate unique IDs for new study items
+  const [idCounter, setIdCounter] = React.useState(0);
+  // Function to add a new study item
+  const addStudyItem = () => {
+    // Basic validation
+    if (newSubject.trim() === '' || newStudyTime.trim() === '') {
+      alert('Please enter both a subject and a target study time.');
+      return;
+    }
+    const timeInMinutes = parseInt(newStudyTime, 10);
+    if (isNaN(timeInMinutes) || timeInMinutes <= 0) {
+      alert('Please enter a valid positive number for target study time (in minutes).');
+      return;
+    }
+    const newItem = {
+      id: idCounter,
+      subject: newSubject.trim(),
+      targetTime: timeInMinutes,
+      completed: false,
+    };
+    setStudyItems([...studyItems, newItem]); // Add new item to the list
+    setNewSubject(''); // Clear subject input
+    setNewStudyTime(''); // Clear time input
+    setIdCounter(idCounter + 1); // Increment ID counter for the next item
+  };
+  // Function to toggle the completion status of a study item
+  const toggleComplete = (id) => {
+    setStudyItems(
+      studyItems.map((item) =>
+        item.id === id ? { ...item, completed: !item.completed } : item
+      )
+    );
+  };
+  // Function to delete a study item
+  const deleteItem = (id) => {
+    setStudyItems(studyItems.filter((item) => item.id !== id));
+  };
+  // Calculate progress metrics
+  const totalItems = studyItems.length;
+  const completedItems = studyItems.filter((item) => item.completed).length;
+  const totalTargetTime = studyItems.reduce((sum, item) => sum + item.targetTime, 0);
+  const completedTargetTime = studyItems.reduce((sum, item) =>
+    item.completed ? sum + item.targetTime : sum,
+    0
+  );
+  const progressPercentage = totalTargetTime > 0 ? (completedTargetTime / totalTargetTime) * 100 : 0;
+  return (
+    <div style={{
+      fontFamily: 'Arial, sans-serif',
+      maxWidth: '700px',
+      margin: '20px auto',
+      padding: '25px',
+      border: '1px solid #e0e0e0',
+      borderRadius: '10px',
+      boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+      backgroundColor: '#fdfdfd'
+    }}>
+      <h1 style={{
+        textAlign: 'center',
+        color: '#2c3e50',
+        marginBottom: '30px',
+        borderBottom: '2px solid #3498db',
+        paddingBottom: '10px'
+      }}>
+        📚 Student Study Planner
+      </h1>
+      {/* Add New Study Item Section */}
+      <div style={{
+        marginBottom: '35px',
+        padding: '20px',
+        border: '1px solid #dcdcdc',
+        borderRadius: '8px',
+        backgroundColor: '#f0f8ff'
+      }}>
+        <h2 style={{
+          color: '#34495e',
+          marginBottom: '20px',
+          fontSize: '1.4em'
+        }}>
+          Add New Study Item
+        </h2>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <input
+            type="text"
+            placeholder="Subject Name (e.g., Algebra)"
+            value={newSubject}
+            onChange={(e) => setNewSubject(e.target.value)}
+            style={{
+              flexGrow: '1',
+              padding: '12px',
+              border: '1px solid #bbb',
+              borderRadius: '5px',
+              minWidth: '180px',
+              fontSize: '1em'
+            }}
+          />
+          <input
+            type="number"
+            placeholder="Target Time (minutes)"
+            value={newStudyTime}
+            onChange={(e) => setNewStudyTime(e.target.value)}
+            style={{
+              width: '130px',
+              padding: '12px',
+              border: '1px solid #bbb',
+              borderRadius: '5px',
+              fontSize: '1em'
+            }}
+          />
+          <button
+            onClick={addStudyItem}
+            style={{
+              padding: '12px 20px',
+              backgroundColor: '#28a745',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '1em',
+              fontWeight: 'bold',
+              transition: 'background-color 0.2s ease'
+            }}
+          >
+            Add Item
+          </button>
+        </div>
+      </div>
+      {/* Progress Overview Section */}
+      <div style={{
+        marginBottom: '35px',
+        padding: '20px',
+        border: '1px solid #dcdcdc',
+        borderRadius: '8px',
+        backgroundColor: '#e6ffe6'
+      }}>
+        <h2 style={{
+          color: '#34495e',
+          marginBottom: '15px',
+          fontSize: '1.4em'
+        }}>
+          Your Progress
+        </h2>
+        <p style={{ marginBottom: '8px' }}>Total Study Items: <strong>{totalItems}</strong></p>
+        <p style={{ marginBottom: '8px' }}>Completed Items: <strong>{completedItems}</strong></p>
+        <p style={{ marginBottom: '8px' }}>Total Target Study Time: <strong>{totalTargetTime} minutes</strong></p>
+        <p style={{ marginBottom: '20px' }}>Completed Target Study Time: <strong>{completedTargetTime} minutes</strong></p>
+        <div style={{
+          height: '15px',
+          backgroundColor: '#ddd',
+          borderRadius: '8px',
+          overflow: 'hidden',
+          marginBottom: '10px'
+        }}>
+          <div style={{
+            width: `${progressPercentage}%`,
+            height: '100%',
+            backgroundColor: '#28a745',
+            borderRadius: '8px',
+            transition: 'width 0.5s ease-in-out'
+          }}></div>
+        </div>
+        <p style={{ textAlign: 'right', fontSize: '0.95em', color: '#555' }}>
+          {Math.round(progressPercentage)}% of target time completed
+        </p>
+      </div>
+      {/* Study Item List Section */}
+      <div>
+        <h2 style={{
+          color: '#34495e',
+          marginBottom: '20px',
+          fontSize: '1.4em'
+        }}>
+          Study Items
+        </h2>
+        {studyItems.length === 0 ? (
+          <p style={{ textAlign: 'center', color: '#777', fontSize: '1.1em' }}>
+            No study items planned yet. Use the form above to add your first item!
+          </p>
+        ) : (
+          <ul style={{ listStyle: 'none', padding: 0 }}>
+            {studyItems.map((item) => (
+              <li
+                key={item.id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '15px 20px',
+                  marginBottom: '12px',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '8px',
+                  backgroundColor: item.completed ? '#e9ffe9' : '#ffffff',
+                  boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+                  transition: 'background-color 0.2s ease'
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={item.completed}
+                  onChange={() => toggleComplete(item.id)}
+                  style={{ marginRight: '18px', transform: 'scale(1.3)' }}
+                />
+                <span
+                  style={{
+                    flexGrow: '1',
+                    fontSize: '1.15em',
+                    textDecoration: item.completed ? 'line-through' : 'none',
+                    color: item.completed ? '#777' : '#333',
+                    transition: 'color 0.2s ease, text-decoration 0.2s ease'
+                  }}
+                >
+                  {item.subject} - {item.targetTime} minutes
+                </span>
+                <button
+                  onClick={() => deleteItem(item.id)}
+                  style={{
+                    padding: '8px 12px',
+                    backgroundColor: '#dc3545',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    marginLeft: '15px',
+                    fontSize: '0.9em',
+                    transition: 'background-color 0.2s ease'
+                  }}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="project-shell theme-sunset-warmth">
+      <div className="project-card">
+        <div className="project-hero">
+          <span className="project-badge">Sunset Warmth</span>
+          <h1>Sunset Warmth</h1>
+          <p>A warm, soft interface with uplifting coral tones.</p>
+        </div>
+        <div className="project-content">
+          <GeneratedApp />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

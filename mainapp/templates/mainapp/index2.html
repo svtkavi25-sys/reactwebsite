@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyAI React Generator</title>
+
+<link rel="stylesheet" href="{% static 'mainapp/style.css' %}">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+    color: white;
+}
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #12121c;
+    padding: 20px;
+}
+
+.sidebar h2 { color: #00d4ff; }
+
+.sidebar a {
+    display: block;
+    margin: 15px 0;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.sidebar a:hover { color: #00d4ff; }
+
+.main {
+    flex: 1;
+    padding: 40px;
+}
+
+textarea, input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #00d4ff, #007bff);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>⚡ MyAI</h2>
+    <a href="/">Chat</a>
+    <a href="/history">History</a>
+</div>
+
+<div class="main">
+
+<h1>🚀 React Generator</h1>
+
+<form action="/process/" method="POST">
+    {% csrf_token %}
+
+    <textarea name="prompt" placeholder="Describe your React app..." required></textarea>
+
+    <input type="text" name="folder" placeholder="Enter folder name (e.g. todoApp)" required>
+
+    <select name="type">
+        <option value="text">Text</option>
+        <option value="react">Generate React App</option>
+        <option value="image">Generate Image</option>
+    </select>
+
+    <button type="submit">Generate</button>
+</form>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+:root {
+  color-scheme: dark;
+  color: #ecfdf5;
+  background: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+  color: #ecfdf5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.project-shell {
+  min-height: 100vh;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, #064e3b 0%, #022c22 100%);
+}
+
+.project-card {
+  width: min(1080px, 100%);
+  background: rgba(6, 78, 59, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 32px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.project-hero {
+  padding: 34px;
+  background: rgba(2, 44, 34, 0.8);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: #10b981;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  margin-bottom: 18px;
+}
+
+.project-hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 2.4vw, 3rem);
+  line-height: 1.05;
+  color: #ecfdf5;
+}
+
+.project-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 760px;
+  line-height: 1.65;
+}
+
+.project-content {
+  padding: 32px;
+}
+
+.project-content h2 {
+  margin-top: 0;
+  color: #34d399;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+button {
+  background: #059669;
+  color: #ffffff;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 1.4rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+input, textarea, select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 14px;
+  color: #ecfdf5;
+  padding: 0.95rem 1rem;
+  width: 100%;
+}

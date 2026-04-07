@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+    <link rel="stylesheet" href="{% static 'mainapp/style.css' %}">
+</head>
+<body>
+<div class="app-shell no-sidebar">
+    <main class="main">
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">History</p>
+                <h1>Chat history</h1>
+            </div>
+            <div class="actions">
+                <a class="btn btn-primary" href="/">← Home</a>
+            </div>
+        </div>
+
+        <section class="history-list">
+            {% if data %}
+                {% for item in data %}
+                    <article class="history-card">
+                        <div class="history-meta">
+                            <span class="badge">Prompt</span>
+                            <p>{{ item.prompt }}</p>
+                        </div>
+                        <div class="history-meta">
+                            <span class="badge accent">Response</span>
+                            <pre>{{ item.response }}</pre>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <p>No history yet. Create a new project to see your activity here.</p>
+                </div>
+            {% endif %}
+        </section>
+    </main>
+</div>
+</body>
+</html> 

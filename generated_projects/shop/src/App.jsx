@@ -1,0 +1,386 @@
+import React from "react";
+import "./App.css";
+
+// Strict Rules Compliance:
+// - Must use: function GeneratedApp()
+// - Must return JSX
+// - No import (React and its hooks like useState, useEffect are assumed to be globally available as `React.useState`, `React.useEffect`)
+// - No export
+// - No ReactDOM.render
+// - Use React.useState if needed
+// - Keep it simple and valid
+
+// Global utility styles for reusability without imports
+const appContainerStyle = {
+  fontFamily: 'Arial, sans-serif',
+  maxWidth: '800px',
+  margin: '20px auto',
+  padding: '20px',
+  border: '1px solid #ccc',
+  borderRadius: '8px',
+  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+};
+
+const navButtonStyle = {
+  margin: '0 5px',
+  padding: '8px 15px',
+  border: '1px solid #007bff',
+  borderRadius: '4px',
+  backgroundColor: '#007bff',
+  color: 'white',
+  cursor: 'pointer',
+  fontSize: '1em',
+  fontWeight: 'bold'
+};
+
+const inputStyle = {
+  width: '100%',
+  padding: '10px',
+  margin: '5px 0',
+  boxSizing: 'border-box',
+  borderRadius: '4px',
+  border: '1px solid #ccc',
+  fontSize: '1em'
+};
+
+const buttonStyle = {
+  padding: '10px 20px',
+  backgroundColor: '#007bff',
+  color: 'white',
+  border: 'none',
+  borderRadius: '4px',
+  cursor: 'pointer',
+  fontSize: '1em'
+};
+
+const tableHeaderStyle = {
+  padding: '12px',
+  border: '1px solid #ddd',
+  textAlign: 'left',
+  backgroundColor: '#f2f2f2'
+};
+
+const tableCellStyle = {
+  padding: '12px',
+  border: '1px solid #ddd'
+};
+
+// --- Helper Components (defined as global functions to comply with "no import/export") ---
+
+function LoginPage({ onLogin, onNavigate }) {
+  const [username, setUsername] => React.useState('');
+  const [password, setPassword] => React.useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username.trim() === '' || password.trim() === '') {
+      alert('Please enter both username and password.');
+      return;
+    }
+    onLogin(username, password);
+  };
+
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="login-username" style={{ display: 'block', marginBottom: '5px' }}>Username:</label>
+          <input type="text" id="login-username" value={username} onChange={(e) => setUsername(e.target.value)} required style={inputStyle} />
+        </div>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="login-password" style={{ display: 'block', marginBottom: '5px' }}>Password:</label>
+          <input type="password" id="login-password" value={password} onChange={(e) => setPassword(e.target.value)} required style={inputStyle} />
+        </div>
+        <button type="submit" style={buttonStyle}>Login</button>
+      </form>
+      <p style={{ marginTop: '20px' }}>Don't have an account? <a href="#" onClick={(e) => { e.preventDefault(); onNavigate(); }}>Signup here</a></p>
+    </div>
+  );
+}
+
+function SignupPage({ onSignup, onNavigate }) {
+  const [username, setUsername] => React.useState('');
+  const [password, setPassword] => React.useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username.trim() === '' || password.trim() === '') {
+      alert('Please enter both username and password.');
+      return;
+    }
+    onSignup(username, password);
+  };
+
+  return (
+    <div>
+      <h2>Signup</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="signup-username" style={{ display: 'block', marginBottom: '5px' }}>Username:</label>
+          <input type="text" id="signup-username" value={username} onChange={(e) => setUsername(e.target.value)} required style={inputStyle} />
+        </div>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="signup-password" style={{ display: 'block', marginBottom: '5px' }}>Password:</label>
+          <input type="password" id="signup-password" value={password} onChange={(e) => setPassword(e.target.value)} required style={inputStyle} />
+        </div>
+        <button type="submit" style={buttonStyle}>Signup</button>
+      </form>
+      <p style={{ marginTop: '20px' }}>Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); onNavigate(); }}>Login here</a></p>
+    </div>
+  );
+}
+
+function Dashboard({ username, onNavigate, onLogout }) {
+  return (
+    <div>
+      <h2>Dashboard</h2>
+      <p>Welcome, {username}!</p>
+      <div style={{ display: 'flex', gap: '15px', marginTop: '30px' }}>
+        <button onClick={() => onNavigate('addProduct')} style={buttonStyle}>Add New Product</button>
+        <button onClick={() => onNavigate('viewProducts')} style={buttonStyle}>View All Products</button>
+      </div>
+      <button onClick={onLogout} style={{ ...buttonStyle, backgroundColor: '#dc3545', marginTop: '30px' }}>Logout</button>
+    </div>
+  );
+}
+
+function AddProductPage({ onAddProduct, onNavigate }) {
+  const [name, setName] => React.useState('');
+  const [price, setPrice] => React.useState('');
+  const [quantity, setQuantity] => React.useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim() || !price.trim() || !quantity.trim()) {
+      alert('Please fill in all fields.');
+      return;
+    }
+    const productPrice = parseFloat(price);
+    const productQuantity = parseInt(quantity, 10);
+
+    if (isNaN(productPrice) || productPrice <= 0) {
+      alert('Price must be a positive number.');
+      return;
+    }
+    if (isNaN(productQuantity) || productQuantity <= 0) {
+      alert('Quantity must be a positive integer.');
+      return;
+    }
+
+    onAddProduct({ name, price: productPrice, quantity: productQuantity });
+    setName('');
+    setPrice('');
+    setQuantity('');
+  };
+
+  return (
+    <div>
+      <h2>Add New Product</h2>
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="product-name" style={{ display: 'block', marginBottom: '5px' }}>Product Name:</label>
+          <input type="text" id="product-name" value={name} onChange={(e) => setName(e.target.value)} required style={inputStyle} />
+        </div>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="product-price" style={{ display: 'block', marginBottom: '5px' }}>Price ($):</label>
+          <input type="number" step="0.01" id="product-price" value={price} onChange={(e) => setPrice(e.target.value)} required style={inputStyle} />
+        </div>
+        <div style={{ marginBottom: '15px' }}>
+          <label htmlFor="product-quantity" style={{ display: 'block', marginBottom: '5px' }}>Quantity:</label>
+          <input type="number" id="product-quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} required style={inputStyle} />
+        </div>
+        <button type="submit" style={buttonStyle}>Add Product</button>
+        <button type="button" onClick={() => onNavigate('dashboard')} style={{ ...buttonStyle, backgroundColor: '#6c757d', marginLeft: '10px' }}>Cancel</button>
+      </form>
+    </div>
+  );
+}
+
+function ViewProductsPage({ products, onNavigate }) {
+  return (
+    <div>
+      <h2>View Products</h2>
+      {products.length === 0 ? (
+        <p>No products added yet. <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('addProduct'); }}>Add some!</a></p>
+      ) : (
+        <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+          <thead>
+            <tr style={{ backgroundColor: '#f2f2f2' }}>
+              <th style={tableHeaderStyle}>Name</th>
+              <th style={tableHeaderStyle}>Price</th>
+              <th style={tableHeaderStyle}>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product, index) => (
+              <tr key={product.id || index} style={{ borderBottom: '1px solid #eee' }}>
+                <td style={tableCellStyle}>{product.name}</td>
+                <td style={tableCellStyle}>${product.price ? product.price.toFixed(2) : 'N/A'}</td>
+                <td style={tableCellStyle}>{product.quantity}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      <button onClick={() => onNavigate('dashboard')} style={{ ...buttonStyle, marginTop: '30px' }}>Back to Dashboard</button>
+    </div>
+  );
+}
+
+
+// --- Main App Component ---
+function App() {
+  // Page navigation state
+  const [currentPage, setCurrentPage] => React.useState('loading'); // 'loading', 'login', 'signup', 'dashboard', 'addProduct', 'viewProducts'
+
+  // Authentication state
+  const [isLoggedIn, setIsLoggedIn] => React.useState(false);
+  const [username, setUsername] => React.useState('');
+
+  // Product data state
+  const [products, setProducts] => React.useState([]);
+
+  // --- React.useEffect hooks ---
+  // Effect to check login status from localStorage and load initial products on mount
+  React.useEffect(() => {
+    const storedUsername = localStorage.getItem('shopAppUsername');
+    const storedIsLoggedIn = localStorage.getItem('shopAppIsLoggedIn') === 'true';
+
+    if (storedIsLoggedIn && storedUsername) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername);
+      setCurrentPage('dashboard');
+    } else {
+      setCurrentPage('login');
+    }
+
+    // Load products from the Django database
+    window.loadData().then(data => {
+      // Filter out only product-related payloads
+      const loadedProducts = data
+        .filter(item => item.payload && item.payload.type === 'product' && item.payload.id)
+        .map(item => item.payload);
+      setProducts(loadedProducts);
+    }).catch(error => {
+      console.error("Failed to load data from database:", error);
+      // Optionally, set an error message in state
+    });
+
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
+  // --- Authentication Handlers ---
+  const handleLogin = (user, pass) => {
+    const storedCreds = JSON.parse(localStorage.getItem('shopAppUsers') || '{}');
+    if (storedCreds[user] && storedCreds[user] === pass) { // Simple check, NOT secure for production
+      setIsLoggedIn(true);
+      setUsername(user);
+      localStorage.setItem('shopAppUsername', user);
+      localStorage.setItem('shopAppIsLoggedIn', 'true');
+      setCurrentPage('dashboard');
+    } else {
+      alert('Invalid username or password.');
+    }
+  };
+
+  const handleSignup = (user, pass) => {
+    const storedCreds = JSON.parse(localStorage.getItem('shopAppUsers') || '{}');
+    if (storedCreds[user]) {
+      alert('Username already exists. Please login.');
+      setCurrentPage('login');
+      return;
+    }
+    storedCreds[user] = pass; // Store plain password for simplicity, NOT secure.
+    localStorage.setItem('shopAppUsers', JSON.stringify(storedCreds));
+    alert('Signup successful! Please login.');
+    setCurrentPage('login');
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername('');
+    localStorage.removeItem('shopAppUsername');
+    localStorage.removeItem('shopAppIsLoggedIn');
+    setCurrentPage('login');
+  };
+
+  // --- Product Management Handler ---
+  const handleAddProduct = (product) => {
+    // Assign a unique ID and a type to the product payload
+    const productPayload = { ...product, id: Date.now(), type: 'product' };
+    
+    window.saveData(productPayload)
+      .then(() => {
+        setProducts(prevProducts => [...prevProducts, productPayload]);
+        alert('Product added successfully!');
+        setCurrentPage('viewProducts'); // Navigate to view products after successful add
+      })
+      .catch(error => {
+        console.error("Failed to save product to database:", error);
+        alert('Failed to add product. Please try again.');
+      });
+  };
+
+  // --- Page Rendering Logic ---
+  const renderPage = () => {
+    if (currentPage === 'loading') {
+      return <div>Loading...</div>;
+    }
+
+    if (!isLoggedIn) {
+      if (currentPage === 'signup') {
+        return <SignupPage onSignup={handleSignup} onNavigate={() => setCurrentPage('login')} />;
+      }
+      return <LoginPage onLogin={handleLogin} onNavigate={() => setCurrentPage('signup')} />;
+    }
+
+    // Render pages for logged-in users
+    switch (currentPage) {
+      case 'dashboard':
+        return <Dashboard username={username} onNavigate={setCurrentPage} onLogout={handleLogout} />;
+      case 'addProduct':
+        return <AddProductPage onAddProduct={handleAddProduct} onNavigate={setCurrentPage} />;
+      case 'viewProducts':
+        return <ViewProductsPage products={products} onNavigate={setCurrentPage} />;
+      default:
+        // Default to dashboard if an unknown page is set while logged in
+        return <Dashboard username={username} onNavigate={setCurrentPage} onLogout={handleLogout} />;
+    }
+  };
+
+  return (
+    <div style={appContainerStyle}>
+      <h1>Shop Management App</h1>
+      {isLoggedIn && (
+        <nav style={{ marginBottom: '25px', borderBottom: '1px solid #eee', paddingBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <button onClick={() => setCurrentPage('dashboard')} style={navButtonStyle}>Dashboard</button>
+            <button onClick={() => setCurrentPage('addProduct')} style={navButtonStyle}>Add Product</button>
+            <button onClick={() => setCurrentPage('viewProducts')} style={navButtonStyle}>View Products</button>
+          </div>
+          <button onClick={handleLogout} style={{ ...navButtonStyle, backgroundColor: '#dc3545', border: '1px solid #dc3545', marginLeft: 'auto' }}>Logout</button>
+        </nav>
+      )}
+      {renderPage()}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div className="project-shell theme-deep-forest">
+      <div className="project-card">
+        <div className="project-hero">
+          <span className="project-badge">Deep Forest</span>
+          <h1>Woodland Serenity</h1>
+          <p>Grounded and organic with deep greenery and soft moss tones.</p>
+        </div>
+        <div className="project-content">
+          <GeneratedApp />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

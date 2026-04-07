@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midnight Glow React Preview</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.2), transparent 20%), radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.18), transparent 18%), #08101f;
+      color: #eff6ff;
+    }
+    .preview-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .preview-card {
+      width: min(1100px, 100%);
+      padding: 32px;
+      border-radius: 28px;
+      background: rgba(10, 18, 37, 0.95);
+      box-shadow: 0 28px 90px rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+    }
+    .preview-title {
+      margin: 0 0 10px;
+      font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+      color: #eff6ff;
+    }
+    .preview-subtitle {
+      margin: 0 0 26px;
+      color: rgba(226, 232, 240, 0.82);
+      line-height: 1.7;
+      max-width: 820px;
+    }
+  </style>
+</head>
+<body>
+  <div class="preview-shell">
+    <div class="preview-card">
+      <h2 class="preview-title">Midnight Glow</h2>
+      <p class="preview-subtitle">A bold, neon-infused interface with layered contrast.</p>
+      <div id="root"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+const { useState, useEffect } = React;
+
+try {
+function App() {
+  // Define an array of image URLs
+  const images = [
+    'https://via.placeholder.com/400x250/FF5733/FFFFFF?text=Image+1',
+    'https://via.placeholder.com/400x250/33FF57/FFFFFF?text=Image+2',
+    'https://via.placeholder.com/400x250/3357FF/FFFFFF?text=Image+3',
+    'https://via.placeholder.com/400x250/F533FF/FFFFFF?text=Image+4',
+  ];
+  // Use React.useState to manage the current image index
+  // The first element is the current state value, the second is a function to update it.
+  const [currentImageIndex, setCurrentImageIndex] = React.useState(0);
+  // Function to navigate to the next image
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      (prevIndex + 1) % images.length // Loop back to the first image if at the end
+    );
+  };
+  // Function to navigate to the previous image
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      (prevIndex - 1 + images.length) % images.length // Loop to the last image if at the beginning
+    );
+  };
+  // Return JSX to render the image slider
+  return (
+    <div style={{
+      fontFamily: 'Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '20px',
+      border: '1px solid #eee',
+      borderRadius: '8px',
+      boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      maxWidth: '450px',
+      margin: '50px auto'
+    }}>
+      <h2>Image Slider</h2>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '15px',
+        marginTop: '20px'
+      }}>
+        {/* Previous Button */}
+        <button
+          onClick={prevImage}
+          style={{
+            padding: '10px 15px',
+            fontSize: '16px',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+            backgroundColor: '#f9f9f9',
+            minWidth: '100px'
+          }}
+        >
+          Previous
+        </button>
+        {/* Current Image */}
+        <img
+          src={images[currentImageIndex]}
+          alt={`Slider Image ${currentImageIndex + 1}`}
+          style={{
+            width: '400px',
+            height: '250px',
+            objectFit: 'cover',
+            borderRadius: '8px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        />
+        {/* Next Button */}
+        <button
+          onClick={nextImage}
+          style={{
+            padding: '10px 15px',
+            fontSize: '16px',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            border: '1px solid #ccc',
+            backgroundColor: '#f9f9f9',
+            minWidth: '100px'
+          }}
+        >
+          Next
+        </button>
+      </div>
+      <p style={{ marginTop: '20px', fontSize: '14px', color: '#555' }}>
+        Image {currentImageIndex + 1} of {images.length}
+      </p>
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+} catch (error) {
+  console.error(error);
+  function App() {
+    return (
+      <div>
+        <h3 style={{ color: 'red' }}>❌ React Error</h3>
+        <pre>{String(error)}</pre>
+      </div>
+    );
+  }
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<App />);
+}
+  </script>
+</body>
+</html>

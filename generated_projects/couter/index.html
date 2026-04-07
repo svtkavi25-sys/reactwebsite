@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Preview</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body style="background:#0f172a;color:white;padding:20px;">
+
+<h2>🚀 React Live Preview</h2>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const { useState } = React;
+
+// 🔥 DEFAULT SAFE UI
+let App = function() {
+  return <h3>⚠️ Loading generated app...</h3>;
+};
+
+try {
+
+```jsx
+function App() {
+  // Use React.useState for the counter state.
+  // making React.useState accessible directly.
+  const [count, setCount] = React.useState(0);
+
+  // Function to handle incrementing the count
+  const increment = () => {
+    setCount(prevCount => prevCount + 1);
+  };
+
+  // Function to handle decrementing the count
+  const decrement = () => {
+    setCount(prevCount => prevCount - 1);
+  };
+
+  // Return JSX for the counter interface
+  return (
+    <div>
+      <h1>Simple Counter</h1>
+      <p>Current Count: {count}</p>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+}
+```
+
+// 🔥 VALIDATE RETURN
+const test = App();
+if (!test) {
+  throw new Error("App is returning nothing");
+}
+
+} catch (error) {
+
+  console.error(error);
+
+  App = function() {
+    return (
+      <div>
+        <h3 style={color:"red"}>❌ React Error</h3>
+        <p>Invalid or empty React code</p>
+        <pre>{String(error)}</pre>
+      </div>
+    );
+  };
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+
+</script>
+
+</body>
+</html>
